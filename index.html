@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Day Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-blue">
+    <div class="theme-selector">
+        <button onclick="changeTheme('blue')">🌊 Blue</button>
+        <button onclick="changeTheme('green')">🌿 Green</button>
+        <button onclick="changeTheme('purple')">🔮 Purple</button>
+    </div>
+    
+    <div id="show">
+        <h1>📅 Advanced Day Calculator</h1>
+        
+        <div class="calculator-options">
+            <button id="daysFromTodayBtn" class="active">Days From Today</button>
+            <button id="betweenDatesBtn">Between Two Dates</button>
+        </div>
+        
+        <div id="daysFromTodaySection">
+            <label for="daysInput">Enter number of days:</label>
+            <input type="number" id="daysInput" min="0">
+            <button onclick="calculateDaysFromToday()">Calculate</button>
+        </div>
+        
+        <div id="betweenDatesSection" style="display:none">
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate">
+            
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate">
+            
+            <button onclick="calculateBetweenDates()">Calculate</button>
+        </div>
+        
+        <div id="resultContainer"></div>
+        <div id="countdownContainer"></div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
