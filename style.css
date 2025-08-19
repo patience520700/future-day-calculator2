@@ -6,23 +6,41 @@ body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     transition: all 0.3s ease;
+    background-image: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+}
+
+/* Overlay for better readability */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: -1;
 }
 
 /* Theme Colors */
-body.theme-blue {
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
+body.theme-blue::before {
+    background: rgba(30, 60, 114, 0.7);
 }
-body.theme-green {
-    background: linear-gradient(135deg, #11998e, #38ef7d);
+body.theme-green::before {
+    background: rgba(17, 153, 142, 0.7);
 }
-body.theme-purple {
-    background: linear-gradient(135deg, #4776E6, #8E54E9);
+body.theme-purple::before {
+    background: rgba(71, 118, 230, 0.7);
 }
 
 .theme-selector {
     position: absolute;
     top: 20px;
     right: 20px;
+    z-index: 10;
 }
 .theme-selector button {
     background: rgba(255,255,255,0.2);
@@ -32,6 +50,10 @@ body.theme-purple {
     margin: 0 5px;
     border-radius: 5px;
     cursor: pointer;
+    transition: all 0.2s;
+}
+.theme-selector button:hover {
+    background: rgba(255,255,255,0.3);
 }
 
 #show {
@@ -43,6 +65,7 @@ body.theme-purple {
     max-width: 500px;
     color: white;
     box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .calculator-options {
@@ -56,10 +79,14 @@ body.theme-purple {
     background: rgba(255,255,255,0.1);
     color: white;
     cursor: pointer;
+    transition: all 0.2s;
 }
 .calculator-options button.active {
     background: rgba(255,255,255,0.3);
     font-weight: bold;
+}
+.calculator-options button:hover {
+    background: rgba(255,255,255,0.2);
 }
 
 label {
@@ -73,6 +100,11 @@ input {
     border: 1px solid rgba(255,255,255,0.3);
     background: rgba(255,255,255,0.1);
     color: white;
+    box-sizing: border-box;
+}
+input:focus {
+    outline: none;
+    border-color: rgba(255,255,255,0.5);
 }
 button {
     width: 100%;
@@ -116,4 +148,12 @@ button:hover {
 .countdown-label {
     font-size: 0.8em;
     opacity: 0.8;
+}
+
+.error-message {
+    color: #ff6b6b;
+    padding: 10px;
+    background: rgba(0,0,0,0.1);
+    border-radius: 5px;
+    margin-top: 15px;
 }

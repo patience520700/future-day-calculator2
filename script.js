@@ -1,25 +1,36 @@
-// Initialize with today's date
-document.getElementById('startDate').valueAsDate = new Date();
-document.getElementById('endDate').valueAsDate = new Date();
+// Initialize when DOM is fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Set today's date as default for date inputs
+    document.getElementById('startDate').valueAsDate = new Date();
+    document.getElementById('endDate').valueAsDate = new Date();
+    
+    // Switch between calculator modes
+    document.getElementById('daysFromTodayBtn').addEventListener('click', function() {
+        this.classList.add('active');
+        document.getElementById('betweenDatesBtn').classList.remove('active');
+        document.getElementById('daysFromTodaySection').style.display = 'block';
+        document.getElementById('betweenDatesSection').style.display = 'none';
+        clearResults();
+    });
 
-// Switch between calculator modes
-document.getElementById('daysFromTodayBtn').addEventListener('click', function() {
-    this.classList.add('active');
-    document.getElementById('betweenDatesBtn').classList.remove('active');
-    document.getElementById('daysFromTodaySection').style.display = 'block';
-    document.getElementById('betweenDatesSection').style.display = 'none';
-});
-
-document.getElementById('betweenDatesBtn').addEventListener('click', function() {
-    this.classList.add('active');
-    document.getElementById('daysFromTodayBtn').classList.remove('active');
-    document.getElementById('daysFromTodaySection').style.display = 'none';
-    document.getElementById('betweenDatesSection').style.display = 'block';
+    document.getElementById('betweenDatesBtn').addEventListener('click', function() {
+        this.classList.add('active');
+        document.getElementById('daysFromTodayBtn').classList.remove('active');
+        document.getElementById('daysFromTodaySection').style.display = 'none';
+        document.getElementById('betweenDatesSection').style.display = 'block';
+        clearResults();
+    });
 });
 
 // Theme changer
 function changeTheme(theme) {
     document.body.className = 'theme-' + theme;
+}
+
+// Clear previous results
+function clearResults() {
+    document.getElementById('resultContainer').innerHTML = '';
+    document.getElementById('countdownContainer').innerHTML = '';
 }
 
 // Calculate days from today
@@ -111,13 +122,16 @@ function startCountdown(targetDate) {
     }
     
     updateCountdown();
-    setInterval(updateCountdown, 1000);
+    const countdownInterval = setInterval(updateCountdown, 1000);
+    
+    // Store interval ID to clear it later if needed
+    window.countdownInterval = countdownInterval;
 }
 
 // Show error message
 function showError(message) {
     document.getElementById('resultContainer').innerHTML = `
-        <div style="color: #ff6b6b; padding: 10px; background: rgba(0,0,0,0.1); border-radius: 5px;">
+        <div class="error-message">
             ❌ ${message}
         </div>
     `;
